@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mycobacterial Diseases - High-Yield Board Review</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent1: #e74c3c;
+            --accent2: #2ecc71;
+            --accent3: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --tt-color: #27ae60;
+            --ll-color: #e74c3c;
+            --border-color: #bdc3c7;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--light);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            background: var(--dark);
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: var(--dark);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-btn:hover {
+            background: var(--primary);
+        }
+        
+        .tab-btn.active {
+            background: white;
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin: 20px 0 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin: 15px 0 10px;
+        }
+        
+        .memory-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent3);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .memory-box h4 {
+            color: var(--accent3);
+            margin-bottom: 10px;
+        }
+        
+        .spectrum-container {
+            display: flex;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .spectrum-side {
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .tt-side {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .ll-side {
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        
+        .spectrum-header {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        
+        .tt-header {
+            background-color: var(--tt-color);
+            color: white;
+        }
+        
+        .ll-header {
+            background-color: var(--ll-color);
+            color: white;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .card {
+            width: 48%;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 10px 15px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .type1-header {
+            background-color: var(--accent2);
+        }
+        
+        .type2-header {
+            background-color: var(--accent1);
+        }
+        
+        .drug-header {
+            background-color: var(--accent3);
+        }
+        
+        .collapsible {
+            background-color: #f9f9f9;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        
+        .collapsible:hover {
+            background-color: #eee;
+        }
+        
+        .collapsible:after {
+            content: '\002B';
+            color: var(--primary);
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        
+        .collapsible.active:after {
+            content: "\2212";
+        }
+        
+        .content {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: white;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .content-inner {
+            padding: 15px 0;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .drug-table th:first-child {
+            width: 20%;
+        }
+        
+        .drug-table th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mycobacterial Diseases</h1>
+            <div class="subtitle">High-Yield Board Review</div>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'leprosy')">Leprosy</button>
+            <button class="tab-btn" onclick="openTab(event, 'cutaneous-tb')">Cutaneous TB</button>
+            <button class="tab-btn" onclick="openTab(event, 'ntm')">NTM</button>
+            <button class="tab-btn" onclick="openTab(event, 'tb-drugs')">TB Drug Side Effects</button>
+        </div>
+        
+        <!-- LEPROSY TAB -->
+        <div id="leprosy" class="tab-content active">
+            <h2>Leprosy (Hansen's Disease)</h2>
+            
+            <div class="memory-box">
+                <h4>🧠 Memory Hooks</h4>
+                <ul>
+                    <li><strong>DR for TT</strong>: HLA-DR2 & HLA-DR3 associated with Tuberculoid Leprosy</li>
+                    <li><strong>DQ for LL</strong>: HLA-DQ1 associated with Lepromatous Leprosy</li>
+                    <li><strong>RD for PB</strong>: Rifampin + Dapsone for Paucibacillary Leprosy</li>
+                    <li><strong>RDC for MB</strong>: Rifampin + Dapsone + Clofazimine for Multibacillary</li>
+                    <li><strong>Th1 for TT</strong>: Strong Th1 response in Tuberculoid</li>
+                    <li><strong>Th2 for LL</strong>: Stronger Th2 response in Lepromatous</li>
+                </ul>
+            </div>
+            
+            <h3>Classification & Immunology: The Spectrum</h3>
+            
+            <div class="spectrum-container">
+                <div class="spectrum-side tt-side">
+                    <div class="spectrum-header tt-header">TT (Tuberculoid) Pole</div>
+                    <ul>
+                        <li>Strong Cell-Mediated Immunity (CMI)</li>
+                        <li>Robust Th1 response</li>
+                        <li>Granulomas++</li>
+                        <li>Few bacilli (paucibacillary)</li>
+                        <li>Positive lepromin test (Mitsuda reaction)</li>
+                        <li>HLA-DR2 & HLA-DR3 association</li>
+                    </ul>
+                </div>
+                <div class="spectrum-side ll-side">
+                    <div class="spectrum-header ll-header">LL (Lepromatous) Pole</div>
+                    <ul>
+                        <li>Weak Cell-Mediated Immunity</li>
+                        <li>Th2 humoral response predominates</li>
+                        <li>Lots of bacilli in macrophages (Virchow cells)</li>
+                        <li>Negative lepromin test</li>
+                        <li>HLA-DQ1 association</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="collapsible">Borderline Forms (BT, BB, BL)</button>
+            <div class="content">
+                <div class="content-inner">
+                    <p>These are the in-between stages, reflecting varying levels of immunity:</p>
+                    <ul>
+                        <li><strong>BT</strong>: Closer to TT pole</li>
+                        <li><strong>BB</strong>: Middle of spectrum ("borderline borderline")</li>
+                        <li><strong>BL</strong>: Closer to LL pole</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="collapsible">Clinical Features</button>
+            <div class="content">
+                <div class="content-inner">
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Clinical Findings</th>
+                                <th style="background-color: var(--ll-color);">Lepromatous (LL)</th>
+                                <th style="background-color: var(--tt-color);">Tuberculoid (TT)</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Type of lesions</strong></td>
+                                <td>Small hypopigmented macules, papulonodules, and <span class="highlight">diffuse infiltration</span> (→ <span class="highlight">leonine facies</span>, elongated earlobes, and madarosis). Loss of eyebrows.</td>
+                                <td><span class="highlight">Dry, scaly, hypopigmented, and anesthetic plaques</span> with raised peripheral rim and central atrophy +/- <span class="highlight">alopecia</span> and anhidrosis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lesion number/size</strong></td>
+                                <td><span class="highlight">Innumerable, small</span></td>
+                                <td><span class="highlight">One or few</span> (<5); large</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Distribution</strong></td>
+                                <td><span class="highlight">Widespread</span></td>
+                                <td><span class="highlight">Localized, asymmetric</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Circumscription</strong></td>
+                                <td><span class="highlight">Poorly defined</span> lesions and difficult to discern edges</td>
+                                <td><span class="highlight">Well-defined</span>; sharply demarcated raised/indurated borders</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sensation within lesions</strong></td>
+                                <td><span class="highlight">Normal</span></td>
+                                <td><span class="highlight">Absent</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Site of nerve enlargement</strong></td>
+                                <td>Symmetric and <span class="highlight">not a/w skin lesions</span></td>
+                                <td>Asymmetric and <span class="highlight">localized around skin lesions</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lepromin test</strong></td>
+                                <td><span class="highlight">Negative</span></td>
+                                <td><span class="highlight">+++</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cell-mediated immunity</strong></td>
+                                <td>None<br>(<span class="highlight">Th2 >> Th1</span>)</td>
+                                <td>Strong<br>(<span class="highlight">Th1 >> Th2</span>)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bacilli in skin lesions</strong></td>
+                                <td><span class="highlight">++++ (globi)</span></td>
+                                <td><span class="highlight">None</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AFB stain</strong><br>(Fite-Faraco stain is best)</td>
+                                <td><span class="highlight">++++</span></td>
+                                <td><span class="highlight">Negative</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Histology</strong></td>
+                                <td><span class="highlight">Grenz zone</span>, diffuse infiltrate of <span class="highlight">parasitized foamy histiocytes (Virchow cells)</span>, free-floating <span class="highlight">clumps of bacilli (globi)</span> in dermis, and "onion-skin" pattern around nerves; lacks well-formed granulomas</td>
+                                <td>Well-formed sarcoidal <span class="highlight">granulomas w/linear arrangement (East-West) along nerves</span>, numerous Langhans giant cells, fragmented nerve fibers, <span class="highlight">lacks organisms</span> (no globi or Virchow cells), and Grenz zone</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Associated findings</strong></td>
+                                <td>Acquired ichthyosis, <span class="highlight">madarosis, saddle nose</span>, lagophthalmos, and orchitis (→ sterility and gynecomastia)</td>
+                                <td>Alopecia<br>Anhidrosis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Other comments</strong></td>
+                                <td><span class="highlight">High risk for type 2 reaction</span><br>Lesions do not have anhidrosis or alopecia</td>
+                                <td>Skin lesions favor face, extremities, and cool areas of trunk<br><span class="highlight">TT often self resolves in 3 years</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+            <button class="collapsible">Peripheral Nerve Involvement</button>
+            <div class="content">
+                <div class="content-inner">
+                    <p><strong>Thickened Nerves</strong> - Key sites to remember:</p>
+                    <ul>
+                        <li>Facial nerve (CN7) and trigeminal nerve (CN5)</li>
+                        <li>Ulnar nerve at the elbow</li>
+                        <li>Common peroneal nerve at fibular head</li>
+                        <li>Greater auricular nerve in neck</li>
+                        <li>Posterior tibial nerve behind medial malleolus</li>
+                    </ul>
+                    <p>Results in sensory and motor deficits along nerve distribution.</p>
+                </div>
+            </div>
+            
+            <button class="collapsible">Work-up</button>
+            <div class="content">
+                <div class="content-inner">
+                    <div class="memory-box">
+                        <h4>🧠 Diagnostic Methods</h4>
+                        <ul>
+                            <li><strong>Skin biopsy</strong> from active margins
+                                <ul>
+                                    <li><span class="highlight">Stains:</span> Gram, Ziehl-Neelsen, or <strong>Fite</strong> (most commonly used) → stain bright red color</li>
+                                    <li>Methenamine silver → fragmented acid-fast bacilli</li>
+                                    <li>Sudan III and Sudan IV (historically) → stain bacilli black and red</li>
+                                    <li><span class="highlight">At least six sections</span> must be examined before declaring samples negative</li>
+                                </ul>
+                            </li>
+                            <li><strong>Scrapings</strong> of skin, lymph nodes, or nasal secretions</li>
+                            <li><strong>Bacilloscopy</strong>
+                                <ul>
+                                    <li>Obtain sample → smear and stain → search for red rods (against a blue background)</li>
+                                    <li>Examined at 100× with oil immersion</li>
+                                </ul>
+                            </li>
+                            <li><strong>Organism prevalence</strong>
+                                <ul>
+                                    <li><span class="highlight">100% of LL</span> • 75% of BL • 5% of TL</li>
+                                </ul>
+                            </li>
+                            <li><strong>PCR</strong> → useful for paucibacillary cases
+                                <ul>
+                                    <li>Performed on slit-skin smears and fresh, frozen, or paraffin-embedded skin biopsy specimens</li>
+                                </ul>
+                            </li>
+                            <li><strong>IHC</strong>
+                                <ul>
+                                    <li>+ve staining for the <span class="highlight">PGL-1 antigen</span> in paucibacillary disease</li>
+                                </ul>
+                            </li>
+                            <li><strong>Serology w/ Anti-PGL Abs (IgG and IgM)</strong> → for multibacillary cases
+                                <ul>
+                                    <li>Classify patients, monitor response to treatment, and predict reactions</li>
+                                    <li>A marker of mycobacterial "load"</li>
+                                    <li><span class="highlight">Elevation of anti-PGL IgM antibody levels</span> is associated with reactions and impairment of nerve function</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="collapsible">Treatment (WHO recommendations)</button>
+            <div class="content">
+                <div class="content-inner">
+                    <div class="memory-box">
+                        <p><span class="highlight">Importantly, after the first dose, the patient is no longer infectious to others</span></p>
+                        <table class="treatment-table">
+                            <thead>
+                                <tr>
+                                    <th>Classification</th>
+                                    <th>Clinical Features</th>
+                                    <th>Duration</th>
+                                    <th>Treatment Regimen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="highlight">Multibacillary</span></td>
+                                    <td>>5 skin lesions</td>
+                                    <td>12-18 months</td>
+                                    <td><span class="highlight">rifampicin 600 mg Qmonth + dapsone 100 mg QD + clofazimine 300 mg once a month and 50 mg daily</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="highlight">Paucibacillary</span></td>
+                                    <td>2-5 skin lesions</td>
+                                    <td>6 -9 months</td>
+                                    <td><span class="highlight">rifampicin 600 mg Qmonth + dapsone 100 mg QD</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Single skin lesion paucibacillary</td>
+                                    <td>1 skin lesion</td>
+                                    <td><span class="highlight">single dose</span></td>
+                                    <td><span class="highlight">rifampicin 600 mg + ofloxacin 400 mg + minocycline 100 mg</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Pediatric Dosing</h3>
+                    <div class="memory-box">
+                        <table class="treatment-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient Category</th>
+                                    <th>Rifampicin</th>
+                                    <th>Clofazimine</th>
+                                    <th>Dapsone</th>
+                                    <th>Ofloxacin</th>
+                                    <th>Minocycline</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10 to 14 years of age, MB</td>
+                                    <td>450 mg once monthly</td>
+                                    <td>150 mg once monthly and 50 mg every other day</td>
+                                    <td>50 mg daily</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>12 blister packs over 12 to 18 months</td>
+                                </tr>
+                                <tr>
+                                    <td>&lt;10 years of age, MB</td>
+                                    <td>300 mg once monthly</td>
+                                    <td>100 mg once monthly and 50 mg twice weekly</td>
+                                    <td>25 mg daily</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>12 blister packs over 12 to 18 months</td>
+                                </tr>
+                                <tr>
+                                    <td>5 to 14 years of age, single lesion PB</td>
+                                    <td>300 mg × 1</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>200 mg × 1</td>
+                                    <td>50 mg × 1</td>
+                                    <td>Single dose</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><small>†For PB disease (2–5 lesions), clofazimine is not required and the duration of therapy is 6 to 9 months.</small></p>
+                    </div>
+                    
+                    <div class="memory-box">
+                        <h4>📌 Household Contact Risk</h4>
+                        <ul>
+                            <li><span class="highlight" style="background-color: orange; color: rgb(0, 0, 0);">~20-25% increased risk for household contacts</span></li>
+                            <li>WHO recommends single-dose Rifampin prophylaxis in endemic areas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+                 
+            
+            <h3>Leprosy Reactions</h3>
+            
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header type1-header">Type 1 Reaction (Reversal)</div>
+                    <div class="card-body">
+                       
+                        <ul>
+                            <li><strong>Immunology:</strong> <span class="highlight">Increased Th1 response. In Borderline Types</span></li>
+                            <li><strong>Timing:</strong> Before(in case of pregnancy , Stress , or other infections), during, or after treatment</li>
+                            <li><strong>Clinical:</strong> Existing lesions become inflamed, edematous and ulcerated</li>
+                            <li><strong>Neuritis:</strong> Common - nerve pain, tenderness</li>
+                            <li><strong>Systemic:</strong> None, unlike Type 2</li>
+                            <li><strong>Management:</strong> <span class="highlight">Prednisone: 40 mg per
+                                day tapered over 12 to
+                                36 weeks, depending upon whether paucibacillary vs multibacillary</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header type2-header">Type 2 Reaction (ENL)</div>
+                    <div class="card-body">
+                        <p><strong>Think:</strong> Immune Complex Deposition, in lepromatous</p>
+                        <ul>
+                            <li><strong>Immunology:</strong> Th2 response, immune complex formation</li>
+                            <li><strong>Timing:</strong> Common in LL and BL during MB treatment</li>
+                            <li><strong>Clinical:</strong> New painful erythematous nodules</li>
+                            <li><strong>Systemic:</strong> Fever, malaise, neuritis, iridocyclitis</li>
+                            <li><strong>Management:</strong> <span class="highlight">Thalidomide: for severe
+                                disease, 400 mg po daily then taper to 300 mg
+                                po daily once reaction under control followed by taper to the lowest dose without a flare; latter
+                                dose then continued 2–3 months</span> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header type2-header">Lucio Phenomenon</div>
+                    <div class="card-body">
+                        <p><strong>Think:</strong> Severe Necrotizing Vasculitis, in lepromatous</p>
+                        <ul>
+                            <li><strong>Epidemiology:</strong> Only occurs in patients from western Mexico</li>
+                            <li><strong>Association:</strong> Diffuse lepromatous leprosy</li>
+                            <li><strong>Pathology:</strong> Necrotizing vasculitis with thrombosis</li>
+                            <li><strong>Clinical:</strong> Purpuric macules and ulcerative bullous lesions below the knees</li>
+                            <li><strong>Management:</strong> <span class="highlight">Prednisone</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CUTANEOUS TB TAB -->
+        <div id="cutaneous-tb" class="tab-content">
+            <h2>Cutaneous Tuberculosis</h2>
+            
+            <div class="memory-box">
+                <h4>🧠 Classification by Route</h4>
+                <ul>
+                    <li><strong>Endogenous:</strong> Lupus Vulgaris 🛡️, Scrofuloderma, Orificial tuberculosis, acute miliary tuberculosis, Tuberculous gumma </li>
+                    <li><strong> Inoculation:</strong> Tuberculous Chancre in TB naïve individuals (wtihout previous Immunity), TBVC - "Warty TB" 🛡️ - direct inoculation in previously exposed (with previous Immunity)</li>
+                    <li><strong>Tuberculids:</strong> "Ide" hypersensitivity reactions 🛡️</li>
+                </ul>
+            </div>
+            
+            <h3>Clinical Presentations</h3>
+            
+            <button class="collapsible">Lupus Vulgaris (LV)</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li>Chronic progressive. Contiguous spread , hematogenously or via lymphatics</li>
+                        <li><span class="highlight">"Apple Jelly" </span> (hallmark) - seen on diascopy</li>
+                        <li>Red-brown, sometimes annular papules/plaques</li>
+                        <li>Multiple clinical presentations:
+                            <ul>
+                                <li>Plaque-type</li>
+                                <li>Ulcerative or mutilating</li>
+                                <li>Vegetating</li>
+                                <li>Tumor-like</li>
+                                <li>Papulonodular</li>
+                            </ul>
+                        </li>
+                        <li>Head and neck predilection (especially face, nose, ears, cheeks)</li>
+                        <li>Scarring centrally as it heals</li>
+                        <li>Associated with moderate to high immunity</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="collapsible">Scrofuloderma ("King's Evil")</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li><span class="highlight">"Cold Abscess"</span> - firm subcutaneous nodule becoming fluctuant</li>
+                        <li>Multiple draining sinuses</li>
+                        <li>spread from underlying infected nodes/bone (usually cervical)</li>
+                        <li>Keloid scarring after healing</li>
+                        <li>Associated with low immunity</li>
+                    
+<li><img src="cutaneous_tb_lesion.jpg" alt="Cutaneous tuberculosis presenting as a characteristic ulcerative lesion" style="max-width: 100%; border-radius: 6px; margin: 10px 0;"></li>
+
+                        <li>Often seen in cervical, axillary, or inguinal regions</li>
+                        <li>Can lead to significant disfigurement if untreated</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="collapsible">TB Verrucosa Cutis (TBVC)</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li>Verrucous (wart-like) hyperkeratotic plaque</li>
+                        <li>Extremities (hands, feet, trauma sites)</li>
+                        <li>"Prosector's wart" in pathologists</li>
+                        <li>Good immunity = Paucibacillary</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="collapsible">Tuberculous Chancre</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li>Painless papulonodule progressing to ulcer</li>
+                        <li>Regional lymphadenopathy (forming a primary complex)</li>
+                        <li>Rare, except in Asia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="collapsible">Tuberculids</button>
+            <div class="content">
+                <div class="content-inner">
+                    <p><strong>Papulonecrotic Tuberculid:</strong></p>
+                    <ul>
+                        <li>Symmetric dusky red papules on extensor surfaces</li>
+                        <li>Central necrosis, may ulcerate</li>
+                    </ul>
+                    <p><strong>Erythema Induratum (of Bazin):</strong></p>
+                    <ul>
+                        <li>Subcutaneous nodules on calves</li>
+                        <li>Nodules may ulcerate</li>
+                        <li>Women predominantly affected</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>Diagnosis</h3>
+            
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Diagnostic Method</th>
+                        <th>Features</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Histopathology</strong></td>
+                        <td>
+                            <ul>
+                                <li>Granulomatous inflammation (hallmark)</li>
+                                <li>Caseation necrosis (variable)</li>
+                                <li>Epithelioid histiocytes & Langhans giant cells</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>AFB Stain</strong></td>
+                        <td>
+                            <ul>
+                                <li>Often negative in paucibacillary forms (LV, tuberculids)</li>
+                                <li>More likely positive in scrofuloderma, chancre</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mantoux & IGRA</strong></td>
+                        <td>
+                            <ul>
+                                <li>Positive in most forms (except early chancre)</li>
+                                <li>IGRA preferred in BCG-vaccinated individuals</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Culture</strong></td>
+                        <td>
+                            <ul>
+                                <li><span class="highlight">Gold standard</span> for definitive diagnosis</li>
+                                <li>Slow growing - inform lab to culture for Mycobacteria</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>PCR</strong></td>
+                        <td>
+                            <ul>
+                                <li>Rapid and sensitive</li>
+                                <li>Useful when AFB/culture negative</li>
+                                <li>Can be used on paraffin-embedded tissue</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>Treatment</h3>
+            
+            <div class="memory-box">
+                <h4>📌 Standard Anti-TB Therapy (ATT)</h4>
+                <p><strong>Intensive Phase (2 months):</strong> <span class="highlight">HRZE</span> - Isoniazid, Rifampin, Pyrazinamide, Ethambutol</p>
+                <p><strong>Continuation Phase (4+ months):</strong> <span class="highlight">HR</span> - Isoniazid, Rifampin</p>
+                <p>⚠️ Extended treatment (6-9 months) often needed for cutaneous TB</p>
+            </div>
+        </div>
+        
+        <!-- NTM TAB -->
+        <div id="ntm" class="tab-content">
+            <h2>Non-Tuberculous Mycobacteria (NTM)</h2>
+            
+            <div class="memory-box">
+                <h4>🧠 Common Species & Exposures</h4>
+                <ul>
+                    <li><strong>M. marinum</strong>: "Fish Tank Granuloma" - aquatic exposure</li>
+                    <li><strong>M. ulcerans</strong>: "Buruli Ulcer" - endemic water exposure</li>
+                    <li><strong>RGM</strong>: M. fortuitum, M. chelonae, M. abscessus - post-procedural, medical devices</li>
+                </ul>
+            </div>
+            
+            <h3>Clinical Presentations</h3>
+            
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Species</th>
+                        <th>Presentation</th>
+                        <th>Key Features</th>
+                    </tr>
+                    <tr>
+                        <td><strong>M. marinum</strong></td>
+                        <td>Fish Tank Granuloma</td>
+                        <td>
+                            <ul>
+                                <li><span class="highlight">Sporotrichoid pattern</span> (ascending lesions along lymphatics)</li>
+                                <li>Extremities (often hands)</li>
+                                <li>Aquarium or swimming pool exposure</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>M. ulcerans</strong></td>
+                        <td>Buruli Ulcer</td>
+                        <td>
+                            <ul>
+                                <li>Painless, deep, undermined ulcer</li>
+                                <li>Starts as nodule</li>
+                                <li><span class="highlight">Mycolactone toxin</span> causes tissue destruction</li>
+                                <li>Endemic in Africa, Australia, Asia</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>RGM</strong><br>(M. fortuitum, M. chelonae, M. abscessus)</td>
+                        <td>Post-procedural infections</td>
+                        <td>
+                            <ul>
+                                <li>Post-trauma or procedure history</li>
+                                <li>Pustules, abscesses, nodules</li>
+                                <li>Surgery, injection, tattoo sites</li>
+                                <li>M. fortuitum in nail salon exposures</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>Diagnosis</h3>
+            
+            <ul>
+                <li>Consider NTM in non-healing granulomatous lesions with relevant exposure</li>
+                <li>Histopathology: Granulomas, neutrophilic abscesses with RGM</li>
+                <li>AFB Stain: Often positive, but not always</li>
+                <li><span class="highlight">Culture on specialized media</span>: Essential for species ID and susceptibility</li>
+                <li>Important: Inform lab you suspect NTM! Different growth requirements</li>
+                <li>PCR & 16S rRNA Sequencing: Rapid identification</li>
+            </ul>
+            
+            <h3>Treatment</h3>
+            
+            <div class="memory-box">
+                <h4>📌 Macrolide-Based Regimens</h4>
+                <p><strong>Foundation:</strong> Clarithromycin or Azithromycin</p>
+                <p><strong>Combination with:</strong></p>
+                <ul>
+                    <li>Rifabutin, Ethambutol</li>
+                    <li>Quinolones (Moxifloxacin, Ciprofloxacin)</li>
+                    <li>Amikacin, Linezolid, Doxycycline, TMP-SMX</li>
+                </ul>
+                <p><strong>Other considerations:</strong></p>
+                <ul>
+                    <li>Surgical excision for localized lesions</li>
+                    <li>Prolonged treatment (3-6+ months)</li>
+                    <li>Susceptibility testing essential for RGM</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- TB DRUGS TAB -->
+        <div id="tb-drugs" class="tab-content">
+            <h2>Anti-Tuberculosis Drug Side Effects</h2>
+            
+            <div class="memory-box">
+                <h4>🧠 First-Line TB Drugs: HRZE</h4>
+                <ul>
+                    <li><strong>H</strong>: Isoniazid (INH)</li>
+                    <li><strong>R</strong>: Rifampin (RIF)</li>
+                    <li><strong>Z</strong>: Pyrazinamide (PZA)</li>
+                    <li><strong>E</strong>: Ethambutol (EMB)</li>
+                </ul>
+            </div>
+            
+            <h3>Key Side Effects by Drug</h3>
+            
+            <div class="table-container">
+                <table class="drug-table">
+                    <tr>
+                        <th>Drug</th>
+                        <th>Dermatologic</th>
+                        <th>Systemic</th>
+                        <th>Monitoring</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Isoniazid (INH)</strong></td>
+                        <td>
+                            <ul>
+                                <li>Rash</li>
+                                <li>SJS/TEN (rare)</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span class="highlight">Peripheral Neuropathy</span></li>
+                                <li>Hepatotoxicity</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>LFTs</li>
+                                <li>Neurological exam</li>
+                                <li>Prevent neuropathy with Vitamin B6 (Pyridoxine)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rifampin (RIF)</strong></td>
+                        <td>
+                            <ul>
+                                <li>Rash</li>
+                                <li><span class="highlight">Orange discoloration</span> of secretions</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Hepatotoxicity</li>
+                                <li>Hepatic enzyme induction</li>
+                                <li>Drug interactions</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>LFTs</li>
+                                <li>Warn patients about orange secretions</li>
+                                <li>Check drug interactions</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pyrazinamide (PZA)</strong></td>
+                        <td>
+                            <ul>
+                                <li><span class="highlight">Photosensitivity</span></li>
+                                <li>Rash</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Hyperuricemia (gout)</li>
+                                <li>Hepatotoxicity</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>LFTs</li>
+                                <li>Uric acid (if gout history)</li>
+                                <li>Sun protection</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ethambutol (EMB)</strong></td>
+                        <td>
+                            <ul>
+                                <li>Rash</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li><span class="highlight">Optic Neuritis</span></li>
+                                <li>Color blindness (red-green)</li>
+                                <li>Decreased visual acuity</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Regular vision testing</li>
+                                <li>Color vision testing</li>
+                                <li>Stop if vision changes</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>Managing Drug Side Effects</h3>
+            
+            <div class="card-container">
+                <div class="card" style="width: 100%;">
+                    <div class="card-header drug-header">Drug-Induced Hepatitis</div>
+                    <div class="card-body">
+                        <p><strong>Symptoms:</strong> RUQ pain, nausea, vomiting, jaundice, fatigue</p>
+                        <p><strong>Labs:</strong> Elevated LFTs (AST, ALT, bilirubin)</p>
+                        <p><strong>Management:</strong></p>
+                        <ol>
+                            <li>Stop all hepatotoxic drugs</li>
+                            <li>After LFTs normalize, reintroduce one by one:</li>
+                            <ol type="a">
+                                <li>Start with Rifampin</li>
+                                <li>Then add INH</li>
+                                <li>Then add Ethambutol</li>
+                                <li>PZA often avoided if severe hepatitis</li>
+                            </ol>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-box">
+                <h4>⚠️ Serious Reactions Requiring Immediate Drug Discontinuation</h4>
+                <ul>
+                    <li>SJS/TEN</li>
+                    <li>Severe hepatitis</li>
+                    <li>Optic neuritis</li>
+                    <li>Severe neuropathy</li>
+                </ul>
+                <p>Always consult ID/Pulm specialist for management!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        function openTab(evt, tabName) {
+            var i, tabContent, tabBtns;
+            
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            
+            tabBtns = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // Collapsible content
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
