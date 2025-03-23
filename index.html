@@ -296,6 +296,126 @@
         .drug-table th {
             text-align: center;
         }
+        
+        /* Search feature styling */
+        .search-container {
+            display: flex;
+            margin: 15px auto 0;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background-color: white;
+        }
+        
+        #searchButton {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary);
+            font-size: 18px;
+        }
+        
+        .search-results-container {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            max-height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-top: 10px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .search-results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--secondary);
+            color: white;
+            font-weight: bold;
+        }
+        
+        #closeResults {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .results-list {
+            overflow-y: auto;
+            max-height: 350px;
+            padding: 10px;
+        }
+        
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .result-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .result-item h4 {
+            margin: 0 0 5px;
+            color: var(--primary);
+        }
+        
+        .result-context {
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .search-highlight {
+            background-color: #ffeb3b;
+            padding: 2px 0;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+        
+        /* For responsiveness */
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 90%;
+            }
+            
+            .search-results-container {
+                width: 95%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -303,6 +423,19 @@
         <header>
             <h1>Mycobacterial Diseases</h1>
             <div class="subtitle">High-Yield Board Review</div>
+            <!-- Add search container -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a term..." aria-label="Search box">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+            <!-- Add results container -->
+            <div id="searchResults" class="search-results-container">
+                <div class="search-results-header">
+                    <span id="resultCount">0 results</span>
+                    <button id="closeResults"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="resultsList" class="results-list"></div>
+            </div>
         </header>
         
         <div class="tabs">
@@ -667,7 +800,8 @@
                 <ul>
                     <li><strong>Endogenous:</strong> Lupus Vulgaris 🛡️, Scrofuloderma, Orificial tuberculosis, acute miliary tuberculosis, Tuberculous gumma </li>
                     <li><strong> Inoculation:</strong> Tuberculous Chancre in TB naïve individuals (wtihout previous Immunity), TBVC - "Warty TB" 🛡️ - direct inoculation in previously exposed (with previous Immunity)</li>
-                    <li><strong>Tuberculids:</strong> "Ide" hypersensitivity reactions 🛡️</li>
+                    <li><strong>Tuberculids:</strong> Papulonecrotic tuberculid 🛡️, Lichen scrofulosorum 🛡️, Erythema induratum 🛡️</li>
+                    <li><strong>BCG Inoculation:</strong> Complications from BCG vaccination include localized or generalized tuberculids, lupus vulgaris, scrofuloderma, and nonspecific reactions (fever, inflammation, abscesses). Rarely causes disseminated infection in immunodeficient patients affecting the IL-12/IFN-γ axis. MER (methanol extraction residue) of BCG used in melanoma immunotherapy can cause nodules and subcutaneous abscesses.</li>
                 </ul>
             </div>
             
@@ -692,6 +826,8 @@
                         <li>Head and neck predilection (especially face, nose, ears, cheeks)</li>
                         <li>Scarring centrally as it heals</li>
                         <li>Associated with moderate to high immunity</li>
+                        <li>Skin test: Usually positive</li>
+                        <li>Histopathology: No bacilli present</li>
                     
                         <li><img src="images/Vu2.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
                         <li><img src="images/Vu3.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
@@ -721,15 +857,141 @@
                     </ul>
                 </div>
             </div>
-            
+            <button class="collapsible">Orificial Tuberculosis</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li><span class="highlight">Painful ulcers at orifices</span> - marker of severe systemic TB</li>
+                        <li>Results from autoinoculation from active internal TB focus (pulmonary, intestinal, anogenital)</li>
+                        <li>Most common location: mouth, especially tongue</li>
+                        <li>Starts as edematous red papule that progresses to painful ulcer with undermined edges</li>
+                        <li>Associated with compromised immunity and advanced disease</li>
+                        <li>Tuberculin test: Often variable or negative (reflecting immune compromise)</li>
+                        <li>Histopathology: Nonspecific
+                            inflammatory infiltrate and
+                            necrosis, some tubercles with caseation deep in dermis;
+                            bacilli easily found</li>
+                        <li>Diagnosis requires:
+                            <ul>
+                                <li>Clinical suspicion in patients with non-healing orificial ulcers</li>
+                                <li>Histology and culture for confirmation</li>
+                                <li>Investigation for underlying systemic TB (essential)</li>
+                                <li>PCR for rapid diagnosis</li>
+                            </ul>
+                        </li>
+                        <li>Differential diagnosis: HSV, aphthous ulcers, pemphigus, histoplasmosis</li>
+                        <li>Treatment focuses on standard antituberculous therapy for underlying systemic disease</li>
+                        <li><img src="images/oro.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
+                        <li><img src="images/oro1.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="collapsible">Acute Miliary Tuberculosis</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li><span class="highlight">Pinhead-sized, bluish-red papules capped by minute vesicles</span> - marker of disseminated TB</li>
+                        <li>Also known as: Tuberculosis cutis disseminata, Tuberculosis cutis acuta generalisata</li>
+                        <li>Vesicles develop central umbilication followed by crusting</li>
+                        <li>Healing leaves white scars with brownish rim</li>
+                        <li>Results from hematogenous dissemination during bacillemia</li>
+                        <li>Typically occurs in:
+                            <ul>
+                                <li>Children with low socioeconomic status</li>
+                                <li>Immunocompromised hosts</li>
+                                <li>May follow viral infection</li>
+                            </ul>
+                        </li>
+                        <li>Tuberculin test: Usually negative (reflecting immune compromise)</li>
+                        <li>Histopathology: Prominent necrosis with nonspecific inflammatory infiltrate; abundant bacilli in tissue sections</li>
+                        <li>Diagnosis requires:
+                            <ul>
+                                <li>Smear, histology, and culture of skin lesions</li>
+                                <li>PCR for rapid detection</li>
+                                <li>Investigation for primary TB focus (usually lungs)</li>
+                            </ul>
+                        </li>
+                        <li>Differential diagnosis: Varicella, enteroviral exanthems, rickettsialpox, PLEVA</li>
+                        <li>Treatment focuses on standard antituberculous therapy for underlying systemic disease</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="collapsible">Tuberculous Gumma</button>
+            <div class="content">
+                <div class="content-inner">
+                    <ul>
+                        <li>Also known as: Metastatic tuberculous ulcer, Metastatic tuberculous abscess</li>
+                        <li><span class="highlight">Firm subcutaneous nodule that slowly softens, forming undermined ulcers and sinus tracts</span></li>
+                        <li>Results from hematogenous spread (mycobacteremia with cutaneous seeding)</li>
+                        <li>Typically affects extremities (lower) </li>
+                        <li>Typically occurs in:
+                            <ul>
+                                <li>Children with low socioeconomic status</li>
+                                <li>Immunocompromised hosts</li>
+                            </ul>
+                        </li>
+                        <li>Tuberculin test: Usually negative (reflecting immune compromise)</li>
+                        <li>Histopathology: Massive necrosis and abscess formation; abundant bacilli in necrotic tissue</li>
+                        <li>Diagnosis requires:
+                            <ul>
+                                <li>Culture and histology of lesions</li>
+                                <li>PCR for rapid identification</li>
+                                <li>Investigation for other TB foci</li>
+                                <li>IGRA may be indeterminate, especially in immunocompromised patients</li>
+                            </ul>
+                        </li>
+                        <li>Differential diagnosis: Panniculitis, dimorphic/opportunistic fungal infections, syphilitic gumma, hidradenitis suppurativa</li>
+                        <li>Treatment focuses on standard antituberculous therapy with local wound care; surgical drainage may be considered</li>
+                    </ul>
+                </div>
+            </div>
             <button class="collapsible">TB Verrucosa Cutis (TBVC)</button>
             <div class="content">
                 <div class="content-inner">
                     <ul>
-                        <li>Verrucous (wart-like) hyperkeratotic plaque</li>
-                        <li>Extremities (hands, feet, trauma sites)</li>
-                        <li>"Prosector's wart" in pathologists</li>
-                        <li>Good immunity = Paucibacillary</li>
+                        <li>Most common form of cutaneous tuberculosis </li>
+                        <li>Occurs in previously infected persons with moderate to high immunity to M. tuberculosis</li>
+                        <li>Results from exogenous inoculation at trauma-prone sites</li>
+                        <li>Typically affects extremities (hands, feet) at sites of trauma</li>
+                        <li>Common in occupational exposure (pathologists, butchers)</li>
+                        <li>Clinical features:
+                            <ul>
+                                <li>Begins as small, asymptomatic, indurated wart-like papule with inflammatory rim</li>
+                                <li>Gradually enlarges in serpiginous pattern</li>
+                                <li>Forms firm reddish-brown verrucous plaque</li>
+                                <li>Center may become fluctuant with expressible pus and debris</li>
+                                <li>May heal spontaneously after several years</li>
+                            </ul>
+                        </li>
+                        <li>Tuberculin skin test: Positive </li>
+                        <li>Histopathology:
+                            <ul>
+                                <li>Acute inflammation in epidermis</li>
+                                <li>Pseudoepitheliomatous hyperplasia</li>
+                                <li>Microabscesses in upper dermis</li>
+                                <li>Sparse granulomatous foci</li>
+                                <li>Bacilli often scant and difficult to find (paucibacillary)</li>
+                            </ul>
+                        </li>
+                        <li>Diagnosis:
+                            <ul>
+                                <li>Culture to confirm M. tuberculosis</li>
+                                <li>PCR for rapid identification</li>
+                                <li>IGRA should be positive</li>
+                                <li>Supportive histology</li>
+                            </ul>
+                        </li>
+                        <li>Differential diagnosis:
+                            <ul>
+                                <li>Warts (common verrucae)</li>
+                                <li>Verrucous fungal infections (chromomycosis)</li>
+                                <li>Tertiary syphilis</li>
+                                <li>Hypertrophic lichen planus</li>
+                                <li>Verrucous carcinoma</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -738,9 +1000,26 @@
             <div class="content">
                 <div class="content-inner">
                     <ul>
-                        <li>Painless papulonodule progressing to ulcer</li>
-                        <li>Regional lymphadenopathy (forming a primary complex)</li>
-                        <li>Rare, except in Asia</li>
+                        <li>Occurs in previously uninfected individuals <span class="highlight">without prior TB immunity</span></li>
+                        <li>Clinical features:
+                            <ul>
+                                <li>Develops 2-4 weeks after inoculation</li>
+                                <li>Begins as painless, firm, red-brown papulonodule</li>
+                                <li>Slowly enlarges and erodes to form sharply demarcated ulcer</li>
+                                <li>Regional lymphadenopathy </li>
+                                <li>Typically heals spontaneously within 3-12 months with atrophic scar</li>
+                            </ul>
+                        </li>
+                        <li>Histopathology:
+                            <ul>
+                                <li>Early: Acute neutrophilic inflammation with necrosis; bacilli present</li>
+                                <li>Later: Granulomatous inflammation with caseation; bacilli disappear</li>
+                            </ul>
+                        </li>
+                        <li>Tuberculin test: Initially negative</li>
+                        <li>Rare, except in Asia (1-2% of cutaneous TB cases)</li>
+                        <li>Diagnosis: History, culture, PCR for rapid identification</li>
+                        <li>Differential diagnosis: Pyogenic ulcers, sporotrichosis, fungal infections, M. marinum, nocardiosis, tularemia, syphilis, cat scratch disease</li>
                     </ul>
                 </div>
             </div>
@@ -748,16 +1027,44 @@
             <button class="collapsible">Tuberculids</button>
             <div class="content">
                 <div class="content-inner">
-                    <p><strong>Papulonecrotic Tuberculid:</strong></p>
+                    <p>- The tuberculids represent a group of disorders that classically were associated with systemic TB.</p>
+                    <p>- They are considered immune reactions within the skin due to hematogenous dissemination of M. tuberculosis or its antigens from a primary source, in an individual with strong antituberculous cell-mediated immunity.</p>
+                    <p>- Often beginning as an immune complex-mediated reaction, they evolve into a granulomatous inflammatory response.</p>
                     <ul>
-                        <li>Symmetric dusky red papules on extensor surfaces</li>
-                        <li>Central necrosis, may ulcerate</li>
-                    </ul>
-                    <p><strong>Erythema Induratum (of Bazin):</strong></p>
-                    <ul>
-                        <li>Subcutaneous nodules on calves</li>
-                        <li>Nodules may ulcerate</li>
-                        <li>Women predominantly affected</li>
+                        <li><strong>Papulonecrotic tuberculid</strong>
+                            <ul>
+                                <li>Seen most frequently in children and young adults</li>
+                                <li>Presents with dusky red papules or papulopustules that are widely distributed in a symmetric pattern</li>
+                                <li>Typically favor the extensor extremities and buttocks</li>
+                                <li>Individual lesions may have central necrosis and are usually asymptomatic</li>
+                                <li>Histopathologically, there is associated vasculitis</li>
+                                <li>Usually there is spontaneous healing of individual lesions, often with scar formation</li>
+                                <li>Multiple cyclic eruptions are characteristic, even after antituberculous therapy</li>
+                                <li>Due to PLEVA, GVHD</li>
+                                <li><img src="images/pap.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
+                                <li><img src="images/pap1.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
+                            </ul>
+                        </li>
+                        <li><strong>Lichen scrofulosorum</strong>
+                            <ul>
+                                <li>The early lesions of lichen scrofulosorum are firm, typically perifollicular, tiny yellow-brown, tiny flat-topped papules with variable scaling</li>
+                                <li>These asymptomatic papules are grouped in clusters, predominantly on the trunk</li>
+                                <li>Lesions may persist for months and then disappear without scarring</li>
+                                <li>Although it is seen in all age groups, children with active TB are most frequently affected</li>
+                                <li>This type of tuberculid has been frequently reported after BCG vaccination and can be triggered by tuberculin testing in highly reactive patients</li>
+                                <li><img src="images/idsc.jpg" style="max-width: 50%; border-radius: 3px; margin: 5px 0;"></li>
+                            </ul>
+                        </li>
+                        <li><strong>Erythema induratum (nodular vasculitis)</strong>
+                            <ul>
+                                <li>A form of lobular panniculitis that is associated with M. tuberculosis infection in a subset of affected individuals, especially in countries with a high prevalence of TB</li>
+                                <li>Both immune complex deposition, which may play a role in the vasculitic component, and a delayed-type hypersensitivity reaction to mycobacterial antigens are thought to be involved in the pathogenesis</li>
+                                <li>Women are most commonly affected (80-90% of patients), with peaks in incidence during early adolescence and around menopause</li>
+                                <li>Symptoms often begin after exposure to low temperatures</li>
+                                <li>Typically, subcutaneous nodules appear on the posterior of both legs that may progress to deep, chronic, irregular deep ulcers with undermined borders</li>
+                                <li>Healing results in atrophic, hyperpigmented scars</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -793,7 +1100,8 @@
                         <td><strong>Mantoux & IGRA</strong></td>
                         <td>
                             <ul>
-                                <li>Positive in most forms (except early chancre)</li>
+                                <li>Strongly positive: Lupus vulgaris, Lichen scrofulosorum, Papulonecrotic tuberculid, Erythema induratum</li>
+                                <li>Commonly positive: Tuberculosis verrucosa cutis</li>
                                 <li>IGRA preferred in BCG-vaccinated individuals</li>
                             </ul>
                         </td>
@@ -839,7 +1147,7 @@
                 <ul>
                     <li><strong>M. marinum</strong>: "Fish Tank Granuloma" - aquatic exposure</li>
                     <li><strong>M. ulcerans</strong>: "Buruli Ulcer" - endemic water exposure</li>
-                    <li><strong>RGM</strong>: M. fortuitum, M. chelonae, M. abscessus - post-procedural, medical devices</li>
+                    <li><strong>RGM</strong>: M. fortuitum, M. chelonae, M. abscessus - some has The ability survive sterilization procedures and to even contaminate antiseptic solutions can lead to infections in surgical patients.post-procedural, medical devices</li>
                 </ul>
             </div>
             
@@ -849,41 +1157,101 @@
                 <table>
                     <tr>
                         <th>Species</th>
-                        <th>Presentation</th>
                         <th>Key Features</th>
                     </tr>
                     <tr>
                         <td><strong>M. marinum</strong></td>
-                        <td>Fish Tank Granuloma</td>
                         <td>
                             <ul>
                                 <li><span class="highlight">Sporotrichoid pattern</span> (ascending lesions along lymphatics)</li>
                                 <li>Extremities (often hands)</li>
                                 <li>Aquarium or swimming pool exposure</li>
+                                <li>Grows best at 31°C (slower than other mycobacteria)</li>
+                                <li>Treatment: clarithromycin, rifampin/ethambutol, minocycline, or TMP-SMX</li>
                             </ul>
                         </td>
                     </tr>
                     <tr>
                         <td><strong>M. ulcerans</strong></td>
-                        <td>Buruli Ulcer</td>
                         <td>
                             <ul>
                                 <li>Painless, deep, undermined ulcer</li>
                                 <li>Starts as nodule</li>
                                 <li><span class="highlight">Mycolactone toxin</span> causes tissue destruction</li>
                                 <li>Endemic in Africa, Australia, Asia</li>
+                                <li>Affects children &lt;15 years old</li>
+                                <li>HIV-infected individuals do not appear to be predisposed</li>
+                                <li>Ulcers on extremities; can become &gt;15 cm and extend to bones</li>
+                                <li>Skin lesions are painless</li>
+                                <li>No regional lymphadenopathy or systemic manifestations</li>
+                                <li>Treatment: excision (treatment of choice), local heating, rifampin + streptomycin, and amputation</li>
                             </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>RGM</strong><br>(M. fortuitum, M. chelonae, M. abscessus)</td>
-                        <td>Post-procedural infections</td>
+                        <td><strong>M. avium complex</strong></td>
+                        <td>
+                            <ul>
+                                <li>More commonly seen in AIDS patients</li>
+                                <li>Found in environment (water, soil, animals)</li>
+                                <li>Pulmonary infection is most common finding</li>
+                                <li>Skin findings w/ primary inoculation or via dissemination (pustules, ulcers on legs, nodules)</li>
+                                <li>↑alkaline phosphatase with disseminated disease</li>
+                                <li>Tx: clarithromycin/azithromycin + ethambutol +/- rifampin</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rapid growing mycobacteria</strong><br>(M. fortuitum, M. chelonae, M. abscessus)</td>
                         <td>
                             <ul>
                                 <li>Post-trauma or procedure history</li>
                                 <li>Pustules, abscesses, nodules</li>
                                 <li>Surgery, injection, tattoo sites</li>
                                 <li>M. fortuitum in nail salon exposures</li>
+                                <li>Rapid growing mycobacteria</li>
+                                <li>Saprophytic organisms - lives on dead materials</li>
+                                <li>Can get infections posttrauma/surgery or medical treatments (e.g., implant placement, liposuction, botulinum toxin)</li>
+                                <li>Post-injection abscess is another frequent presentation</li>
+                                <li>Skin presentations vary, but most common is inflamed subcutaneous nodules</li>
+                                <li>Grows on routine bacterial culture media (5% sheep blood agar or chocolate agar) within 7 days</li>
+                                <li>Consider in patients with therapy-resistant or "cold" abscesses</li>
+                                <li>Clarithromycin is treatment of choice, but surgical treatment may be needed</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>M. scrofulaceum</strong></td>
+                        <td>
+                            <ul>
+                                <li>Produces <span class="highlight">self-limited disease</span>, particularly lymphadenitis</li>
+                                <li>May cause <span class="highlight">cervical lymphadenitis with sinus formation</span> clinically <span class="highlight">indistinguishable from scrofuloderma</span></li>
+                                <li>Widely distributed in environment - found in dairy products, <span class="highlight">oysters</span>, soil, and water</li>
+                                <li>Found on the skin of healthy people and in cutaneous lesions of leprosy</li>
+                                <li>Primarily affects children via inhalation or ingestion</li>
+                                <li>May cause pulmonary disease and local lymphadenitis, primarily in submandibular and submaxillary regions</li>
+                                <li><span class="highlight">Usually a benign, self-limited condition with no systemic symptoms except for mild neck pain</span></li>
+                                <li>Involved lymph nodes slowly enlarge over several weeks, eventually leading to ulceration and drainage with fistula formation</li>
+                                <li>Can also produce cutaneous lesions in a <span class="highlight">sporotrichoid pattern</span></li>
+                                <li>Tx: <span class="highlight">Total excision of the involved lymph nodes</span> is treatment of choice because, in general, antibiotic therapy is unsatisfactory</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>M. haemophilum</strong></td>
+                        <td>
+                            <ul>
+                                <li>Fastidious organism that <span class="highlight">requires ferric ions to grow</span></li>
+                                <li>Requires hemin, hematin, hemoglobin, or ferric ammonium citrate</li>
+                                <li>Primarily affects <span class="highlight">immunocompromised hosts</span></li>
+                                <li>Patients treated with <span class="highlight">TNF inhibitors are at increased risk</span></li>
+                                <li>Can cause cervical lymphadenitis in healthy children</li>
+                                <li>Cutaneous infections following tattooing (including permanent make-up) and acupuncture</li>
+                                <li>Presents as <span class="highlight">single bluish-red tender pustule, papulonodule, or plaque</span></li>
+                                <li>Evolves into an <span class="highlight">abscess and/or ulcer</span></li>
+                                <li>Lesions often multiple and located on the extremities, often overlying joints</li>
+                                <li>Requires a special environment to grow, with a <span class="highlight">temperature between 30°C and 32°C</span></li>
+                                <li>Tx: rifampin and clarithromycin</li>
                             </ul>
                         </td>
                     </tr>
@@ -1105,6 +1473,276 @@
                 }
             });
         }
+        
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const searchResults = document.getElementById('searchResults');
+            const resultsList = document.getElementById('resultsList');
+            const resultCount = document.getElementById('resultCount');
+            const closeResults = document.getElementById('closeResults');
+            
+            // Add Font Awesome for icons
+            const fontAwesome = document.createElement('link');
+            fontAwesome.rel = 'stylesheet';
+            fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+            document.head.appendChild(fontAwesome);
+            
+            // Function to perform search
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                if (searchTerm.length < 2) return; // Require at least 2 characters
+                
+                // Clear previous results
+                resultsList.innerHTML = '';
+                
+                let results = [];
+                let resultSections = new Set();
+                
+                // Search in all collapsible content and their preceding headers
+                const collapsibles = document.getElementsByClassName('collapsible');
+                for (let i = 0; i < collapsibles.length; i++) {
+                    const header = collapsibles[i];
+                    const content = header.nextElementSibling;
+                    const headerText = header.textContent.toLowerCase();
+                    const contentText = content.textContent.toLowerCase();
+                    
+                    // Check if search term exists in header or content
+                    if (headerText.includes(searchTerm) || contentText.includes(searchTerm)) {
+                        resultSections.add(header);
+                        
+                        // Get tab content this collapsible belongs to
+                        const tabContent = header.closest('.tab-content');
+                        const tabId = tabContent.id;
+                        const tabName = document.querySelector(`.tab-btn[onclick*="${tabId}"]`).textContent;
+                        
+                        // Create result object
+                        let resultText = contentText.includes(searchTerm) ? contentText : headerText;
+                        let startIndex = resultText.indexOf(searchTerm);
+                        // Get context around the match (50 characters before and after)
+                        let startContext = Math.max(0, startIndex - 50);
+                        let endContext = Math.min(resultText.length, startIndex + searchTerm.length + 50);
+                        let context = '...' + resultText.substring(startContext, endContext) + '...';
+                        
+                        results.push({
+                            header: header,
+                            content: content,
+                            tabId: tabId,
+                            tabName: tabName,
+                            title: headerText,
+                            context: context,
+                            index: startIndex
+                        });
+                    }
+                }
+                
+                // Also search in table cells
+                const tableCells = document.querySelectorAll('td, th');
+                for (let i = 0; i < tableCells.length; i++) {
+                   const cell = tableCells[i];
+                    const cellText = cell.textContent.toLowerCase();
+                    
+                    if (cellText.includes(searchTerm)) {
+                        // Get the table and find its parent section
+                        const table = cell.closest('table');
+                        const tabContent = table.closest('.tab-content');
+                        const tabId = tabContent.id;
+                        const tabName = document.querySelector(`.tab-btn[onclick*="${tabId}"]`).textContent;
+                        
+                        // Try to find a header near this table
+                        let header = null;
+                        let prevElement = table.previousElementSibling;
+                        while (prevElement && !header) {
+                            if (prevElement.tagName === 'H3' || prevElement.tagName === 'H2') {
+                                header = prevElement;
+                            }
+                            prevElement = prevElement.previousElementSibling;
+                        }
+                        
+                        let headerText = header ? header.textContent : 'Table';
+                        
+                        let startIndex = cellText.indexOf(searchTerm);
+                        let startContext = Math.max(0, startIndex - 50);
+                        let endContext = Math.min(cellText.length, startIndex + searchTerm.length + 50);
+                        let context = '...' + cellText.substring(startContext, endContext) + '...';
+                        
+                        results.push({
+                            element: cell,
+                            tabId: tabId,
+                            tabName: tabName,
+                            title: headerText,
+                            context: context,
+                            index: startIndex
+                        });
+                    }
+                }
+                
+                // Display results count
+                resultCount.textContent = `${results.length} results found`;
+                
+                // Sort results by tab and then by position in document
+                results.sort((a, b) => {
+                    if (a.tabId !== b.tabId) {
+                        return a.tabId.localeCompare(b.tabId);
+                    }
+                    return a.index - b.index;
+                });
+                
+                // Add results to the list
+                let currentTab = '';
+                
+                results.forEach((result, index) => {
+                    // Add tab header if it's a new tab
+                    if (currentTab !== result.tabId) {
+                        currentTab = result.tabId;
+                        const tabHeader = document.createElement('div');
+                        tabHeader.className = 'result-tab-header';
+                        tabHeader.textContent = result.tabName;
+                        tabHeader.style.padding = '5px 10px';
+                        tabHeader.style.background = '#f0f0f0';
+                        tabHeader.style.fontWeight = 'bold';
+                        tabHeader.style.borderBottom = '1px solid #ddd';
+                        resultsList.appendChild(tabHeader);
+                    }
+                    
+                    // Create result item
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'result-item';
+                    
+                    // Create title element
+                    const title = document.createElement('h4');
+                    title.textContent = result.title.charAt(0).toUpperCase() + result.title.slice(1);
+                    resultItem.appendChild(title);
+                    
+                    // Create context with highlighted term
+                    const context = document.createElement('div');
+                    context.className = 'result-context';
+                    const highlightedContext = result.context.replace(
+                        new RegExp(searchTerm, 'gi'), 
+                        match => `<span class="search-highlight">${match}</span>`
+                    );
+                    context.innerHTML = highlightedContext;
+                    resultItem.appendChild(context);
+                    
+                    // Add click event to navigate to the result
+                    resultItem.addEventListener('click', function() {
+                        // Switch to the correct tab
+                        document.querySelector(`.tab-btn[onclick*="${result.tabId}"]`).click();
+                        
+                        // If it's a collapsible section, expand it
+                        if (result.header && result.header.classList.contains('collapsible')) {
+                            if (!result.header.classList.contains('active')) {
+                                result.header.click();
+                            }
+                        }
+                        
+                        // Scroll to the element
+                        const elementToScroll = result.element || result.header || result.content;
+                        elementToScroll.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // Highlight the search term in the actual content
+                        highlightSearchTerm(searchTerm);
+                        
+                        // Close the results panel
+                        searchResults.style.display = 'none';
+                    });
+                    
+                    resultsList.appendChild(resultItem);
+                });
+                
+                // Show results container
+                searchResults.style.display = 'block';
+            }
+            
+            // Function to highlight search term in the actual content
+            function highlightSearchTerm(term) {
+                // Remove any existing highlights
+                const existingHighlights = document.querySelectorAll('.content-highlight');
+                existingHighlights.forEach(el => {
+                    const parent = el.parentNode;
+                    parent.replaceChild(document.createTextNode(el.textContent), el);
+                    parent.normalize();
+                });
+                
+                // Create a recursive function to traverse text nodes
+                function highlightTextNodes(node) {
+                    if (node.nodeType === 3) { // Text node
+                        const text = node.nodeValue;
+                        const regex = new RegExp(term, 'gi');
+                        if (regex.test(text)) {
+                            const fragment = document.createDocumentFragment();
+                            let lastIndex = 0;
+                            let match;
+                            const pattern = new RegExp(term, 'gi');
+                            
+                            while ((match = pattern.exec(text)) !== null) {
+                                // Add text before the match
+                                if (match.index > lastIndex) {
+                                    fragment.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+                                }
+                                
+                                // Create highlighted span for the match
+                                const highlighted = document.createElement('span');
+                                highlighted.className = 'search-highlight content-highlight';
+                                highlighted.appendChild(document.createTextNode(match[0]));
+                                fragment.appendChild(highlighted);
+                                
+                                lastIndex = pattern.lastIndex;
+                            }
+                            
+                            // Add any remaining text
+                            if (lastIndex < text.length) {
+                                fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                            }
+                            
+                            // Replace original node with the fragment
+                            node.parentNode.replaceChild(fragment, node);
+                            return true;
+                        }
+                    } else if (node.nodeType === 1) { // Element node
+                        // Skip script and style elements
+                        if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE') {
+                            return false;
+                        }
+                        
+                        // Process child nodes
+                        Array.from(node.childNodes).forEach(child => {
+                            highlightTextNodes(child);
+                        });
+                    }
+                    return false;
+                }
+                
+                // Start highlighting from the body
+                highlightTextNodes(document.body);
+            }
+            
+            // Event listeners
+            searchButton.addEventListener('click', performSearch);
+            
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            closeResults.addEventListener('click', function() {
+                searchResults.style.display = 'none';
+            });
+            
+            // Close results when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!searchResults.contains(event.target) && 
+                    event.target !== searchInput && 
+                    event.target !== searchButton) {
+                    searchResults.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
+
+
+
